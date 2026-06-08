@@ -1,0 +1,7 @@
+python-dotenv
+litellm
+google-adk
+mcp
+tavily-python
+langfuse
+openinference-instrumentation-google-adk
