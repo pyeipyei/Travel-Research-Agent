@@ -30,16 +30,17 @@ from openinference.instrumentation.google_adk import GoogleADKInstrumentor
 GoogleADKInstrumentor().instrument()
 
 ##################################################
-
 root_agent = Agent(
     name="travel_agent",
     model=MODEL,
-    instruction="""You are an expert travel coordinator. 
+    instruction="""
+    You are an expert travel coordinator. 
     1. Your main job is to plan a trip based on the user's request by parallely calling the necessary sub-agents to gather information.
     2. Analyze the user's prompt to understand exactly what information they need.
     3. If the user asks to plan a trip, you should call all the tools parallely to gather comprehensive information about attractions, weather, and hotels.
     4. If user asks for specific information, call ONLY the tools (sub-agents) necessary to satisfy the request. Do not call irrelevant tools.
-    5. Once you receive the tool outputs, synthesize and summarize them into a polished, cohesive travel guide response for the user.""",
+    5. Once you receive the tool outputs, synthesize and summarize them into a polished, cohesive travel guide response for the user.
+    """,
      tools=[
         AgentTool(agent=attraction_info_agent),
         AgentTool(agent=weather_info_agent),
