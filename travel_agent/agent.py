@@ -5,15 +5,15 @@ from dotenv import load_dotenv
 
 # from .subagents.router_agent.agent import router_agent
 
-from .subagents.attraction_info_agent.agent import attraction_info_agent
-from .subagents.weather_info_agent.agent import weather_info_agent
-from .subagents.hotel_info_agent.agent import hotel_info_agent
+from subagents.attraction_info_agent.agent import attraction_info_agent
+from subagents.weather_info_agent.agent import weather_info_agent
+from subagents.hotel_info_agent.agent import hotel_info_agent
 # from .subagents.summarizer_agent.agent import summarizer_agent
 
 load_dotenv()
 
 MODEL = LiteLlm("openai/gpt-4o-mini")
-
+# MODEL = "gemini-2.0-flash"
 ################################################
 from langfuse import get_client
 
@@ -40,6 +40,8 @@ root_agent = Agent(
     3. If the user asks to plan a trip, you should call all the tools parallely to gather comprehensive information about attractions, weather, and hotels.
     4. If user asks for specific information, call ONLY the tools (sub-agents) necessary to satisfy the request. Do not call irrelevant tools.
     5. Once you receive the tool outputs, synthesize and summarize them into a polished, cohesive travel guide response for the user.
+    6. When you summarize the outputs, don't shrink too much. You should give many information.
+    7. For giving user answers about travel related questions, only give the informaiton provided by the tools. Don't use your internal knowledege. If the tools don't give you data, just reply politely.
     """,
      tools=[
         AgentTool(agent=attraction_info_agent),

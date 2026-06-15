@@ -2,6 +2,7 @@ from google.adk.models.lite_llm import LiteLlm
 from google.adk.agents import Agent
 
 MODEL = LiteLlm("openai/gpt-4o-mini")
+# MODEL = "gemini-2.0-flash"
 
 from google.adk.tools.mcp_tool.mcp_toolset import McpToolset 
 from google.adk.tools.mcp_tool.mcp_session_manager import (
@@ -20,6 +21,7 @@ server_path = (
 
 search_tools = McpToolset(
     connection_params=StdioConnectionParams(
+        timeout=30.0,
         server_params=StdioServerParameters(
             command="python",
             args=[str(server_path)]

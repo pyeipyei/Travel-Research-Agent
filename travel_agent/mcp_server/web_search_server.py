@@ -31,7 +31,7 @@ def search_web(query: str) -> str:
 
     try:
         # Executes the search optimizing results specifically for AI agents
-        response = tavily.search(query=query, max_results=5)
+        response = tavily.search(query=query, max_results=3)
         results = response.get("results", [])
 
         if not results:
@@ -43,9 +43,12 @@ def search_web(query: str) -> str:
 
         return "\n\n---\n\n".join(output)
 
+    # Change this in web_search_server.py
     except Exception as e:
+        import traceback
         print(f"Search failed: {str(e)}", file=sys.stderr)
-        return f"Search failed due to an internal error."
+        traceback.print_exc(file=sys.stderr)  # <--- Add this line!
+        return f"Search failed due to an internal error: {str(e)}" # <-- Temporary for debugging
 
 
 if __name__ == "__main__":

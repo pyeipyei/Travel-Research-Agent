@@ -22,6 +22,7 @@ server_path = (
 
 search_tools = McpToolset(
     connection_params=StdioConnectionParams(
+        timeout=30.0, 
         server_params=StdioServerParameters(
             command="python",
             args=[str(server_path)]
@@ -30,6 +31,7 @@ search_tools = McpToolset(
 )
 
 MODEL = LiteLlm("openai/gpt-4o-mini")
+# MODEL = "gemini-2.0-flash"
 
 weather_info_agent = Agent(
     name="weather_info_agent",
